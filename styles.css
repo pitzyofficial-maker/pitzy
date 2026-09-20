@@ -82,6 +82,9 @@
   }
   em{font-style:italic; color:var(--blue);}
   .section-pad{padding:120px 0;}
+  /* the stat strip used to bridge these two; without it the services block
+     starts closer to the hero */
+  .hero + .section-pad{padding-top:78px;}
   /* sleek divider, used only where two neighbouring sections share a background
      and would otherwise run together with no visible seam */
   .section-rule{
@@ -325,6 +328,9 @@
     font-family:'Playfair Display',serif; font-style:italic;
     font-size:clamp(14px,1.2vw,17px); color:var(--ink-faint); display:block;
   }
+  /* the deck lost its number, so the copy is pinned to the foot of the card
+     where the scrim is densest instead of floating over the bare photo */
+  .what-grid .what-card{justify-content:flex-end;}
   .what-card .wbody{max-width:780px;}
   .what-card h4{
     font-family:'Inter',sans-serif; font-weight:600;
@@ -332,8 +338,8 @@
     margin-bottom:clamp(16px,1.8vw,26px); color:var(--ink); text-wrap:balance;
   }
   .what-card p{
-    font-size:clamp(15px,1.35vw,19px); color:var(--ink-soft);
-    line-height:1.6; font-weight:300; max-width:56ch;
+    font-size:clamp(15px,1.35vw,19px); color:var(--ink);
+    line-height:1.6; font-weight:400; max-width:56ch;
   }
 
 
@@ -541,28 +547,26 @@
 
   /* the button needs lifting too — .cta-bg is positioned and would paint over it */
   .cta-section h2, .cta-section p, .cta-section .btn-primary{position:relative; z-index:2;}
-  .cta-section h2{max-width:860px; margin:0 auto; color:#ffffff;}
+  .cta-section h2{max-width:860px; margin:0 auto 34px; color:#ffffff;}
   .cta-section p{color:rgba(255,255,255,0.78); font-size:16px; margin:22px auto 38px; max-width:460px; font-weight:300;}
 
   /* ===== FOOTER ===== */
-  footer{border-top:1px solid var(--line); padding:56px 0 36px; background:var(--bg);}
+  footer{border-top:1px solid var(--line); padding:40px 0 28px; background:var(--bg);}
   footer .logo-img{height:24px; filter:none;}
-  .footer-top{
-    display:grid; grid-template-columns:1.5fr 1fr 1fr 1.2fr; gap:48px;
-    align-items:start; margin-bottom:52px;
+  .footer-slim{
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:18px 28px; margin-bottom:26px;
   }
-  .footer-brand p{color:var(--ink-soft); font-size:13.5px; margin-top:14px; max-width:290px; line-height:1.65;}
-  .footer-contact a{
-    display:inline-block; margin-top:16px; font-size:14px; font-weight:500; color:var(--ink);
+  .footer-nav{display:flex; gap:26px; flex-wrap:wrap;}
+  .footer-nav a{font-size:14px; color:var(--ink-soft); transition:.3s;}
+  .footer-nav a:hover{color:var(--ink);}
+  .footer-mail{
+    font-size:14px; font-weight:500; color:var(--ink);
     border-bottom:1px solid var(--blue); padding-bottom:2px; transition:.3s var(--ease);
   }
-  .footer-contact a:hover{color:var(--blue);}
-  .footer-cols{display:contents;}
-  .fcol h5{font-size:12.5px; color:var(--ink-faint); margin-bottom:15px; text-transform:uppercase; letter-spacing:0.08em; font-weight:600;}
-  .fcol a{display:block; font-size:14px; color:var(--ink-soft); margin-bottom:11px; transition:.3s;}
-  .fcol a:hover{color:var(--ink);}
+  .footer-mail:hover{color:var(--blue);}
   .footer-bottom{
-    display:flex; justify-content:space-between; align-items:center; padding-top:28px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; padding-top:4px;
     font-size:12.5px; color:var(--ink-faint); flex-wrap:wrap; gap:12px;
   }
 
@@ -763,18 +767,28 @@
     /* stays three across like desktop, just tighter */
     .stat-strip{padding:0 12px;}
     .stat-strip .stat-cell{padding:22px 10px;}
-    .footer-top{flex-direction:column;}
   }
   @media (max-width:560px){
     .wrap{padding:0 20px;}
-    .hero-ctas{flex-direction:column; width:100%;}
-    /* hero hugs its content so the stats sit right under the buttons */
-    .hero{min-height:0; padding-top:130px; padding-bottom:36px;}
+    /* the two hero buttons share one row instead of stacking */
+    .hero-ctas{flex-direction:row; width:100%; gap:10px; margin-top:28px;}
+    .hero-ctas > a{flex:1 1 0; min-width:0; justify-content:center; padding:13px 14px; font-size:13px; white-space:nowrap;}
+    /* the desktop rhythm leaves cavernous gaps on a phone */
+    .section-pad{padding:64px 0;}
+    .hero + .section-pad{padding-top:40px;}
+    .what-card{min-height:auto; padding:26px 22px;}
+    .what-card h4{font-size:26px;}
+    .what-card p{font-size:14.5px;}
+    .footer-slim{flex-direction:column; align-items:flex-start; gap:16px;}
+    /* on a phone the hero owns the first screen, with the next section just
+       peeking in below it */
+    .hero{min-height:88svh; padding-top:120px; padding-bottom:44px;}
+    .hero h1{font-size:34px;}
+    .hero p.sub{font-size:12.5px; margin-top:16px; line-height:1.55; max-width:340px;}
     .stat-strip{padding:0 6px;}
     .stat-strip .stat-cell{padding:18px 6px;}
     .stat-strip .num{font-size:20px; letter-spacing:-0.03em; white-space:nowrap;}
     .stat-strip .lbl{font-size:10.5px; line-height:1.4; margin-top:5px; color:var(--ink-soft);}
-    .footer-cols{gap:40px;}
   }
 
 /* ===== ABOUT PAGE ===== */
