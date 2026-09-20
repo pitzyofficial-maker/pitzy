@@ -756,7 +756,13 @@
       transition:.4s var(--ease);
     }
     nav.scrolled .nav-mobile-toggle{background:rgba(255,255,255,0.08); border-color:var(--line); color:var(--ink);}
-    .what-card{--stick:88px !important;}
+    /* same stepped deck as desktop, just starting under the shorter nav */
+    .what-card:nth-child(1){--stick:88px;}
+    .what-card:nth-child(2){--stick:100px;}
+    .what-card:nth-child(3){--stick:112px;}
+    .what-card:nth-child(4){--stick:124px;}
+    .what-card:nth-child(5){--stick:136px;}
+    .what-card:nth-child(6){--stick:148px;}
     .problem-grid{grid-template-columns:1fr;}
     .process-layout{grid-template-columns:1fr;}
     .process-photo{position:static;}
@@ -776,13 +782,14 @@
     /* the desktop rhythm leaves cavernous gaps on a phone */
     .section-pad{padding:64px 0;}
     .hero + .section-pad{padding-top:40px;}
-    .what-card{min-height:auto; padding:26px 22px;}
-    .what-card h4{font-size:26px;}
-    .what-card p{font-size:14.5px;}
+    /* each card owns most of a screen, so they arrive one at a time */
+    /* one card fills the screen below the nav, so the next one stays hidden
+       until it slides up over it */
+    .what-card{min-height:calc(100svh - 88px); padding:38px 28px;}
     .footer-slim{flex-direction:column; align-items:flex-start; gap:16px;}
     /* on a phone the hero owns the first screen, with the next section just
        peeking in below it */
-    .hero{min-height:88svh; padding-top:120px; padding-bottom:44px;}
+    .hero{min-height:100svh; padding-top:120px; padding-bottom:44px;}
     .hero h1{font-size:34px;}
     .hero p.sub{font-size:12.5px; margin-top:16px; line-height:1.55; max-width:340px;}
     .stat-strip{padding:0 6px;}
