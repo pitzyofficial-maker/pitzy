@@ -195,6 +195,34 @@
     background:linear-gradient(180deg, rgba(4,7,18,0) 0%, rgba(4,7,18,0.35) 30%, rgba(4,7,18,0.62) 65%, rgba(4,7,18,0.72) 100%);
     pointer-events:none;
   }
+  /* phone-only nudge to scroll; hidden on desktop, where the fold is obvious */
+  .hero-scroll{
+    display:none; position:absolute; left:50%; bottom:14px; z-index:3;
+    width:38px; height:38px; border-radius:100px; transform:translateX(-50%);
+    align-items:center; justify-content:center;
+    color:#ffffff; background:rgba(255,255,255,0.14);
+    border:1px solid rgba(255,255,255,0.4); backdrop-filter:blur(6px);
+    box-shadow:0 6px 18px -6px rgba(0,0,0,0.5);
+    animation:scroll-hint 1.7s cubic-bezier(.45,0,.2,1) infinite;
+  }
+  /* a ring pulses out of the button, so the eye catches it even mid-scroll */
+  .hero-scroll::after{
+    content:''; position:absolute; inset:-1px; border-radius:100px;
+    border:1px solid rgba(255,255,255,0.55);
+    animation:scroll-ring 1.7s ease-out infinite;
+  }
+  .hero-scroll svg{position:relative; z-index:1;}
+  @keyframes scroll-hint{
+    0%{transform:translate(-50%,0); opacity:.75;}
+    35%{transform:translate(-50%,8px); opacity:1;}
+    70%{transform:translate(-50%,0); opacity:.85;}
+    100%{transform:translate(-50%,0); opacity:.75;}
+  }
+  @keyframes scroll-ring{
+    0%{transform:scale(1); opacity:.7;}
+    70%{transform:scale(1.75); opacity:0;}
+    100%{transform:scale(1.75); opacity:0;}
+  }
   .hero-top{position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;}
   .hero h1{
     max-width:1000px; color:#ffffff;
@@ -246,7 +274,7 @@
   .btn-glass:hover svg{transform:translate(3px,-2px);}
 
   @media (prefers-reduced-motion: reduce){
-    .hero-img{animation:none;}
+    .hero-img, .hero-scroll, .hero-scroll::after{animation:none;}
     .hero h1, .hero p.sub, .hero-ctas{animation:none; opacity:1; transform:none;}
   }
 
@@ -789,7 +817,8 @@
     .footer-slim{flex-direction:column; align-items:flex-start; gap:16px;}
     /* on a phone the hero owns the first screen, with the next section just
        peeking in below it */
-    .hero{min-height:100svh; padding-top:120px; padding-bottom:44px;}
+    .hero{min-height:100svh; padding-top:120px; padding-bottom:64px;}
+    .hero-scroll{display:flex;}
     .hero h1{font-size:34px;}
     .hero p.sub{font-size:12.5px; margin-top:16px; line-height:1.55; max-width:340px;}
     .stat-strip{padding:0 6px;}
